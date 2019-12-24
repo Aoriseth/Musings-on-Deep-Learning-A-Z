@@ -12,5 +12,5 @@ print(X)
 print(Y)
 
 # %%
-plt.scatter([1,2,3] ,[5,5,8])
+plt.scatter([1, 2, 3], [5, 5, 8])
 plt.show()
