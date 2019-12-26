@@ -1,6 +1,7 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.model_selection import train_test_split
 
 # %%
 dataset = pd.read_csv("Churn_Modelling.csv")
@@ -8,8 +9,6 @@ X = dataset.iloc[:, 3:13].values
 Y = dataset.iloc[:, 13].values
 
 # %%
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-from sklearn.compose import ColumnTransformer
 
 label_encoder = LabelEncoder()
 X[:, 1] = label_encoder.fit_transform(X[:, 1])
@@ -18,6 +17,10 @@ transformer = ColumnTransformer(transformers=[("Country", OneHotEncoder(categori
                                 remainder='passthrough')
 X = transformer.fit_transform(X)
 X = X[:, 1:]
+
+# %%
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
 
 # %%
 print(X)
